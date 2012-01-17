@@ -24,7 +24,7 @@ class ShowIssue(webapp.RequestHandler):
 
 application = webapp.WSGIApplication([(r'/([0-9]+)', ShowIssue),
                                       ('/new', NewIssue),
-                                      (r'/.*', ListIssues)],
+                                      ('/', ListIssues)],
                                      debug=True)
 
 def main():
