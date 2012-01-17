@@ -1,0 +1,8 @@
+application: dartbug-redirector
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /.*
+  script: redirector.py
