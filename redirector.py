@@ -25,7 +25,7 @@ class ShowIssue(webapp.RequestHandler):
       self.redirect(NEW_URL)
 
 class UserMeIssue(webapp.RequestHandler):
-  def get(self, issue_id):
+  def get(self):
     self.redirect(USER_ME_URL)
 
 class UserNameIssue(webapp.RequestHandler):
