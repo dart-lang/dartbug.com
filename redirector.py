@@ -30,7 +30,7 @@ class UserMeIssue(webapp.RequestHandler):
 
 class UserNameIssue(webapp.RequestHandler):
   def get(self, username):
-    self.redirect(USER_ME_URL + username + '%40google.com')
+    self.redirect(USER_URL + username + '%40google.com')
 
 application = webapp.WSGIApplication([(r'/([0-9]+)', ShowIssue),
                                       ('/new', NewIssue),
