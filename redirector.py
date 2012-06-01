@@ -5,6 +5,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 LIST_URL = 'http://code.google.com/p/dart/issues/list'
 NEW_URL = 'http://code.google.com/p/dart/issues/entry'
 SHOW_URL = 'http://code.google.com/p/dart/issues/detail?id='
+USER_ME_URL = 'http://code.google.com/p/dart/issues/list?can=2&q=owner%3Ame'
+USER_URL = 'http://code.google.com/p/dart/issues/list?can=2&q=owner%3A'
 
 class ListIssues(webapp.RequestHandler):
   def get(self):
@@ -22,8 +24,18 @@ class ShowIssue(webapp.RequestHandler):
     except:
       self.redirect(NEW_URL)
 
+class UserMeIssue(webapp.RequestHandler):
+  def get(self, issue_id):
+    self.redirect(USER_ME_URL)
+
+class UserNameIssue(webapp.RequestHandler):
+  def get(self, username):
+    self.redirect(USER_ME_URL + username + '%40google.com')
+
 application = webapp.WSGIApplication([(r'/([0-9]+)', ShowIssue),
                                       ('/new', NewIssue),
+                                      ('/me', UserMeIssue),
+                                      (r'/([a-zA-Z]+)', UserNameIssue),
                                       ('/', ListIssues)],
                                      debug=True)
 
