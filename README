@@ -1,9 +1,0 @@
-Simple redirector to the Dart issue tracker.
-
-http://dartbug.com/    --> issues list
-http://dartbug.com/new --> new issue template
-http://dartbug.com/123 --> specific issue
-http://dartbug.com/me --> issues owned by the logged in user
-http://dartbug.com/username --> issue list for username@google.com
-
-See the LICENSE file.
