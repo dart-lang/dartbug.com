@@ -22,6 +22,7 @@ NEW_URL = 'http://code.google.com/p/dart/issues/entry'
 SHOW_URL = 'http://code.google.com/p/dart/issues/detail?id='
 USER_ME_URL = 'http://code.google.com/p/dart/issues/list?can=2&q=owner%3Ame'
 USER_URL = 'http://code.google.com/p/dart/issues/list?can=2&q=owner%3A'
+PACKAGE_URL = 'http://code.google.com/p/dart/issues/entry?template=Request%20to%20host%20package%20on%20Pub'
 
 class AreaIssues(webapp.RequestHandler):
   def get(self, area):
@@ -34,6 +35,10 @@ class ListIssues(webapp.RequestHandler):
 class NewIssue(webapp.RequestHandler):
   def get(self):
     self.redirect(NEW_URL)
+
+class HostPackage(webapp.RequestHandler):
+  def get(self):
+    self.redirect(PACKAGE_URL)
 
 class ShowIssue(webapp.RequestHandler):
   def get(self, issue_id):
@@ -54,6 +59,7 @@ class UserNameIssue(webapp.RequestHandler):
 application = webapp.WSGIApplication([(r'/([0-9]+)', ShowIssue),
                                       ('/new', NewIssue),
                                       ('/me', UserMeIssue),
+                                      (r'/hostpackage', HostPackage),
                                       (r'/area/([a-zA-Z]+)', AreaIssues),
                                       (r'/([a-zA-Z]+)', UserNameIssue),
                                       ('/', ListIssues)],
