@@ -17,7 +17,14 @@ main() {
   test('new issue', () {
     expect(findRedirect(Uri.parse('http://dartbug.com/new')).toString(),
            '$gitHub/$orginization/$repository/issues/new');
-    expect(findRedirect(Uri.parse('http://dartbug.com/NEW')),
+    expect(findRedirect(Uri.parse('http://dartbug.com/NEW')).toString(),
+           '$gitHub/$orginization/$repository/issues/new');
+  });
+
+  test('user issue', () {
+    expect(findRedirect(Uri.parse('http://dartbug.com/user')).toString(),
+           '$gitHub/$orginization/$repository/issues/created_by/user');
+    expect(findRedirect(Uri.parse('http://dartbug.com/søren')),
            isNull);
   });
 
