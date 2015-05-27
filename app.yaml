@@ -1,8 +1,31 @@
-application: dartbug-redirector
-version: 3
-runtime: python
+version: 2015-05-26
+runtime: custom
+vm: true
 api_version: 1
+threadsafe: true
 
-handlers:
+- url: /(.*\.ico)
+  static_files: static/\1
+  expiration: 7d
+  upload: static/(.*\.ico)
+#  secure: always
+
 - url: /.*
-  script: redirector.py
+  script: _
+#  secure: always
+
+resources:
+  cpu: 1
+
+manual_scaling:
+  instances: 1
+
+#automatic_scaling:
+#  min_num_instances: 1
+#  max_num_instances: 4
+
+skip_files:
+- ^.*/packages.*$
+- ^.*\.dart$
+- ^\.git/.*$
+

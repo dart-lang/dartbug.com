@@ -1,0 +1,7 @@
+name: dartbug.com
+version: 0.1.0
+author: Dart Team
+dependencies:
+  appengine: '>=0.3.0 <0.4.0'
+dev_dependencies:
+  unittest:  '>=0.11.0 <0.12.0'
