@@ -1,4 +1,3 @@
-version: 2015-05-26
 runtime: custom
 vm: true
 api_version: 1
