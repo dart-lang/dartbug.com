@@ -9,7 +9,7 @@ const String gitHub = 'https://github.com';
 const String organization = 'dart-lang';
 
 // Test with gcloud while issues are not enabled for sdk.
-const String repository = 'issue_transfer_testing';
+const String repository = 'sdk';
 
 final RegExp issueRegExp = new RegExp(r'^/([0-9]+)$');
 final RegExp newRegExp = new RegExp(r'^/new$', caseSensitive: false);
