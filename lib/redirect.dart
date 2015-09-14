@@ -4,26 +4,27 @@
 
 library dartbug.com.redirect;
 
+// Environment constants
 const String gitHub = 'https://github.com';
-
 const String organization = 'dart-lang';
-
-// Test with gcloud while issues are not enabled for sdk.
 const String repository = 'sdk';
 
+// Regular expressions for matching the request URI
 final RegExp issueRegExp = new RegExp(r'^/([0-9]+)$');
 final RegExp newRegExp = new RegExp(r'^/new$', caseSensitive: false);
-final RegExp userRegExp = new RegExp(r'^/([A-Za-z]+)$');
+final RegExp assignedRegExp = new RegExp(r'^/assigned/([A-Za-z\-]+)$');
+final RegExp openedRegExp = new RegExp(r'^/opened/([A-Za-z\-]+)$');
 final RegExp areaRegExp = new RegExp(r'^/area/([A-Za-z\-]+)$');
 
-final Uri showIssue = Uri.parse('$gitHub/$organization/$repository/issues/');
-final Uri newIssue = Uri.parse('$gitHub/$organization/$repository/issues/new');
-final Uri userIssues =
-    Uri.parse('$gitHub/$organization/$repository/issues/created_by/');
-final Uri areaIssues = Uri.parse('$gitHub/$organization/$repository/labels/');
-final Uri listIssues = Uri.parse('$gitHub/$organization/$repository/issues');
+// Redirect URIs
+final String rootUri = '$gitHub/$organization/$repository';
+final Uri listIssues = Uri.parse('$rootUri/issues');
+final Uri showIssue = Uri.parse('$rootUri/issues/');
+final Uri newIssue = Uri.parse('$rootUri/issues/new');
+final Uri assignedIssues = Uri.parse('$rootUri/issues/assigned/');
+final Uri openedIssues = Uri.parse('$rootUri/issues/created_by/');
 
-String checkMatch(  RegExp re, String path) {
+String checkMatch(RegExp re, String path) {
   var match = re.firstMatch(path);
   if (match != null) {
     return match.group(match.groupCount);
@@ -53,14 +54,19 @@ Uri findRedirect(Uri requestUri) {
     return newIssue;
   }
 
-  match = checkMatch(userRegExp, path);
+  match = checkMatch(assignedRegExp, path);
   if (match != null) {
-    return userIssues.resolve(match);
+    return assignedIssues.resolve(match);
+  }
+
+  match = checkMatch(openedRegExp, path);
+  if (match != null) {
+    return openedIssues.resolve(match);
   }
 
   match = checkMatch(areaRegExp, path);
   if (match != null) {
-    return areaIssues.resolve(match);
+    return listIssues.replace(queryParameters: {'label': 'area-$match'});
   }
 
   // No redirect found.
