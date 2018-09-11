@@ -3,10 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:io';
-
 import 'package:appengine/appengine.dart';
-
-import 'package:dartbug.com/redirect.dart';
+import 'package:dartbug/redirect.dart';
 
 main() {
   runAppEngine((HttpRequest request) {
@@ -17,7 +15,7 @@ main() {
         ..close();
     } else {
       request.response
-        ..statusCode = HttpStatus.NOT_FOUND
+        ..statusCode = HttpStatus.notFound
         ..close();
     }
   });

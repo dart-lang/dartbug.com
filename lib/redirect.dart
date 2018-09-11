@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library dartbug.com.redirect;
-
 // Environment constants
 const String gitHub = 'https://github.com';
 const String organization = 'dart-lang';
@@ -38,7 +36,7 @@ String checkMatch(RegExp re, String path) {
 /// Returns the [Uri] to redirect to or `null` if no redirect is defined.
 Uri findRedirect(Uri requestUri) {
   var path = requestUri.path;
-  var match;
+  String match;
 
   if (requestUri.pathSegments.length == 0) {
     return listIssues;
