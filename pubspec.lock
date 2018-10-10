@@ -303,7 +303,7 @@ packages:
     source: hosted
     version: "1.4.2"
   shelf:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shelf
       url: "https://pub.dartlang.org"
