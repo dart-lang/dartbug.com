@@ -3,12 +3,13 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:io';
+
 import 'package:appengine/appengine.dart';
 import 'package:dartbug/redirect.dart';
 
-main() {
+void main() {
   runAppEngine((HttpRequest request) {
-    Uri location = findRedirect(request.uri);
+    var location = findRedirect(request.uri);
     if (location != null) {
       request.response
         ..redirect(location)

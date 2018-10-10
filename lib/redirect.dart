@@ -3,26 +3,26 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // Environment constants
-const String gitHub = 'https://github.com';
-const String organization = 'dart-lang';
-const String repository = 'sdk';
+const gitHub = 'https://github.com';
+const organization = 'dart-lang';
+const repository = 'sdk';
 
 // Regular expressions for matching the request URI
-final RegExp issueRegExp = new RegExp(r'^/([0-9]+)$');
-final RegExp newRegExp = new RegExp(r'^/new$', caseSensitive: false);
-final RegExp assignedRegExp = new RegExp(r'^/assigned/([A-Za-z\-]+)$');
-final RegExp openedRegExp = new RegExp(r'^/opened/([A-Za-z\-]+)$');
-final RegExp areaRegExp = new RegExp(r'^/area/([A-Za-z\-]+)$');
+final issueRegExp = RegExp(r'^/([0-9]+)$');
+final newRegExp = RegExp(r'^/new$', caseSensitive: false);
+final assignedRegExp = RegExp(r'^/assigned/([A-Za-z\-]+)$');
+final openedRegExp = RegExp(r'^/opened/([A-Za-z\-]+)$');
+final areaRegExp = RegExp(r'^/area/([A-Za-z\-]+)$');
 
 // Redirect URIs
-final String rootUri = '$gitHub/$organization/$repository';
-final Uri listIssues = Uri.parse('$rootUri/issues');
-final Uri showIssue = Uri.parse('$rootUri/issues/');
-final Uri newIssue = Uri.parse('$rootUri/issues/new');
-final Uri assignedIssues = Uri.parse('$rootUri/issues/assigned/');
-final Uri openedIssues = Uri.parse('$rootUri/issues/created_by/');
+final _rootUri = '$gitHub/$organization/$repository';
+final _listIssues = Uri.parse('$_rootUri/issues');
+final _showIssue = Uri.parse('$_rootUri/issues/');
+final _newIssue = Uri.parse('$_rootUri/issues/new');
+final _assignedIssues = Uri.parse('$_rootUri/issues/assigned/');
+final _openedIssues = Uri.parse('$_rootUri/issues/created_by/');
 
-String checkMatch(RegExp re, String path) {
+String _checkMatch(RegExp re, String path) {
   var match = re.firstMatch(path);
   if (match != null) {
     return match.group(match.groupCount);
@@ -38,33 +38,33 @@ Uri findRedirect(Uri requestUri) {
   var path = requestUri.path;
   String match;
 
-  if (requestUri.pathSegments.length == 0) {
-    return listIssues;
+  if (requestUri.pathSegments.isEmpty) {
+    return _listIssues;
   }
 
-  match = checkMatch(issueRegExp, path);
+  match = _checkMatch(issueRegExp, path);
   if (match != null) {
-    return showIssue.resolve(match);
+    return _showIssue.resolve(match);
   }
 
-  match = checkMatch(newRegExp, path);
+  match = _checkMatch(newRegExp, path);
   if (match != null) {
-    return newIssue;
+    return _newIssue;
   }
 
-  match = checkMatch(assignedRegExp, path);
+  match = _checkMatch(assignedRegExp, path);
   if (match != null) {
-    return assignedIssues.resolve(match);
+    return _assignedIssues.resolve(match);
   }
 
-  match = checkMatch(openedRegExp, path);
+  match = _checkMatch(openedRegExp, path);
   if (match != null) {
-    return openedIssues.resolve(match);
+    return _openedIssues.resolve(match);
   }
 
-  match = checkMatch(areaRegExp, path);
+  match = _checkMatch(areaRegExp, path);
   if (match != null) {
-    return listIssues.replace(queryParameters: {'label': 'area-$match'});
+    return _listIssues.replace(queryParameters: {'label': 'area-$match'});
   }
 
   // No redirect found.

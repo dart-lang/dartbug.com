@@ -5,7 +5,7 @@
 import 'package:dartbug/redirect.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('issue number', () {
     expect(findRedirect(Uri.parse('http://dartbug.com/1234')).toString(),
         '$gitHub/$organization/$repository/issues/1234');
