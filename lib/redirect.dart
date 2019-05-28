@@ -10,9 +10,9 @@ const repository = 'sdk';
 // Regular expressions for matching the request URI
 final issueRegExp = RegExp(r'^/([0-9]+)$');
 final newRegExp = RegExp(r'^/new$', caseSensitive: false);
-final assignedRegExp = RegExp(r'^/assigned/([A-Za-z\-]+)$');
-final openedRegExp = RegExp(r'^/opened/([A-Za-z\-]+)$');
-final areaRegExp = RegExp(r'^/area/([A-Za-z\-]+)$');
+final assignedRegExp = RegExp(r'^/assigned/([A-Za-z0-9\-]+)$');
+final openedRegExp = RegExp(r'^/opened/([A-Za-z0-9\-]+)$');
+final areaRegExp = RegExp(r'^/area/([A-Za-z0-9\-]+)$');
 
 // Redirect URIs
 final _rootUri = '$gitHub/$organization/$repository';
