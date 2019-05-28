@@ -1,5 +1,10 @@
+// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:shelf/shelf.dart';
 
@@ -18,20 +23,25 @@ Handler get handler {
 Response _handler(Request request) {
   _stopwatch.start();
 
-  if (request.requestedUri.pathSegments.length == 1 &&
-      request.requestedUri.pathSegments.single == '\$info') {
-    _infoRequests++;
+  if (request.requestedUri.pathSegments.length == 1) {
+    switch (request.requestedUri.pathSegments.single) {
+      case '\$info':
+        _infoRequests++;
 
-    var data = {
-      'since boot': _stopwatch.elapsed.toString(),
-      'redirects': _redirects,
-      'notFounds': _notFound,
-      'info': _infoRequests,
-      'request headers': SplayTreeMap.of(request.headers),
-    };
+        var data = {
+          'since boot': _stopwatch.elapsed.toString(),
+          'redirects': _redirects,
+          'notFounds': _notFound,
+          'info': _infoRequests,
+          'request headers': SplayTreeMap.of(request.headers),
+        };
 
-    return Response.ok(const JsonEncoder.withIndent(' ').convert(data),
-        headers: {'Content-Type': 'application/json'});
+        return Response.ok(const JsonEncoder.withIndent(' ').convert(data),
+            headers: {'Content-Type': 'application/json'});
+      case 'favicon.ico':
+        return Response.ok(File('static/favicon.ico').readAsBytesSync(),
+            headers: {'Content-Type': 'image/x-icon'});
+    }
   }
 
   var location = findRedirect(request.requestedUri);
