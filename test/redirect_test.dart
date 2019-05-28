@@ -60,4 +60,12 @@ void main() {
       '$gitHub/$organization/$repository/issues?label=area-dart2js',
     );
   });
+
+  test('triage', () {
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/triage')).toString(),
+      startsWith('https://github.com/dart-lang/sdk/issues?'
+          'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer'),
+    );
+  });
 }

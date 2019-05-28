@@ -6,6 +6,7 @@ Simple redirector to the Dart issue tracker.
     http://dartbug.com/opened/<user-id>     --> issues opened by github user <user-id>
     http://dartbug.com/assigned/<user-id>   --> issues assigned to github user <user-id>
     http://dartbug.com/area/<area>          --> issues in <area> (i.e., tagged with label 'area-<area>')
+    http://dartbug.com/triage               --> issues in the Dart SDK without an `area-<area>` label assigned
 
 See the LICENSE file.
 
@@ -23,4 +24,10 @@ $ gcloud builds submit --project dart-redirector --tag gcr.io/dart-redirector/ap
 
 ```console
 $ gcloud beta run deploy --project dart-redirector --image gcr.io/dart-redirector/app
+```
+
+## To update SDK Triage areas
+
+```console
+$ dart tool/update_sdk_labels.dart
 ```
