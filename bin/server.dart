@@ -5,12 +5,19 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:appengine/appengine.dart';
 import 'package:dartbug/server.dart';
+import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
 Future main() async {
-  var controller = StreamController<HttpRequest>(sync: true);
-  serveRequests(controller.stream, handler);
-  await runAppEngine(controller.add);
+  // Find port to listen on from environment variable.
+  var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
+
+  // Serve handler on given port.
+  var server = await serve(
+    const Pipeline().addMiddleware(logRequests()).addHandler(handler),
+    InternetAddress.anyIPv4,
+    port,
+  );
+  print('Serving at http://${server.address.host}:${server.port}');
 }
