@@ -7,24 +7,40 @@ import 'package:test/test.dart';
 
 void main() {
   test('issue number', () {
-    expect(findRedirect(Uri.parse('http://dartbug.com/1234')).toString(),
-        '$gitHub/$organization/$repository/issues/1234');
-    expect(findRedirect(Uri.parse('http://dartbug.com/-1234')), isNull);
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/1234')).toString(),
+      '$gitHub/$organization/$repository/issues/1234',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/-1234')),
+      isNull,
+    );
   });
 
   test('new issue', () {
-    expect(findRedirect(Uri.parse('http://dartbug.com/new')).toString(),
-        '$gitHub/$organization/$repository/issues/new');
-    expect(findRedirect(Uri.parse('http://dartbug.com/NEW')).toString(),
-        '$gitHub/$organization/$repository/issues/new');
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/new')).toString(),
+      '$gitHub/$organization/$repository/issues/new',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/NEW')).toString(),
+      '$gitHub/$organization/$repository/issues/new',
+    );
   });
 
   test('assigned issue', () {
     expect(
-        findRedirect(Uri.parse('http://dartbug.com/assigned/kevmoo'))
-            .toString(),
-        '$gitHub/$organization/$repository/issues/assigned/kevmoo');
-    expect(findRedirect(Uri.parse('http://dartbug.com/søren')), isNull);
+      findRedirect(Uri.parse('http://dartbug.com/assigned/kevmoo')).toString(),
+      '$gitHub/$organization/$repository/issues/assigned/kevmoo',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/assigned/nex3')).toString(),
+      '$gitHub/$organization/$repository/issues/assigned/nex3',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/søren')),
+      isNull,
+    );
   });
 
   test('list issues', () {
@@ -36,7 +52,12 @@ void main() {
 
   test('area', () {
     expect(
-        findRedirect(Uri.parse('http://dartbug.com/area/Area-VM')).toString(),
-        '$gitHub/$organization/$repository/issues?label=area-Area-VM');
+      findRedirect(Uri.parse('http://dartbug.com/area/Area-VM')).toString(),
+      '$gitHub/$organization/$repository/issues?label=area-Area-VM',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/area/dart2js')).toString(),
+      '$gitHub/$organization/$repository/issues?label=area-dart2js',
+    );
   });
 }
