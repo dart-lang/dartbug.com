@@ -18,6 +18,8 @@ final _newIssue = Uri.parse('$_rootUri/issues/new');
 final _assignedIssues = Uri.parse('$_rootUri/issues/assigned/');
 final _openedIssues = Uri.parse('$_rootUri/issues/created_by/');
 
+Iterable<String> get routes => _matchers.keys.map((r) => r.pattern);
+
 final _matchers = <RegExp, Uri Function(String)>{
   RegExp(r'^/([0-9]+)$'): _showIssue.resolve,
   RegExp(r'^/new$', caseSensitive: false): (_) => _newIssue,

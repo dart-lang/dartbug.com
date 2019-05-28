@@ -54,6 +54,9 @@ Response _handler(Request request) {
 I don't support redirecting path '${request.requestedUri.path}'
 
 Check out my source at https://github.com/dart-lang/dartbug.com
+
+Supported routes:
+${routes.map((r) => '  $r').join('\n')}
 """);
   }
 }
