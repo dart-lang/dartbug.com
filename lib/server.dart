@@ -13,6 +13,7 @@ import 'redirect.dart';
 int _infoRequests = 0;
 int _redirects = 0;
 int _notFound = 0;
+int _robotTxt = 0;
 final _stopwatch = Stopwatch();
 
 Handler get handler {
@@ -25,6 +26,14 @@ Response _handler(Request request) {
 
   if (request.requestedUri.pathSegments.length == 1) {
     switch (request.requestedUri.pathSegments.single) {
+      case 'robots.txt':
+        _robotTxt++;
+        return Response.ok(
+          r'''
+User-agent: *
+Disallow: /
+''',
+        );
       case '\$info':
         _infoRequests++;
 
@@ -33,14 +42,19 @@ Response _handler(Request request) {
           'redirects': _redirects,
           'notFounds': _notFound,
           'info': _infoRequests,
+          'robot.txt': _robotTxt,
           'request headers': SplayTreeMap.of(request.headers),
         };
 
-        return Response.ok(const JsonEncoder.withIndent(' ').convert(data),
-            headers: {'Content-Type': 'application/json'});
+        return Response.ok(
+          const JsonEncoder.withIndent(' ').convert(data),
+          headers: {'Content-Type': 'application/json'},
+        );
       case 'favicon.ico':
-        return Response.ok(File('static/favicon.ico').readAsBytesSync(),
-            headers: {'Content-Type': 'image/x-icon'});
+        return Response.ok(
+          File('static/favicon.ico').readAsBytesSync(),
+          headers: {'Content-Type': 'image/x-icon'},
+        );
     }
   }
 
