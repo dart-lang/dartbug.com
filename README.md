@@ -23,7 +23,7 @@ Following instructions at https://cloud.google.com/run/docs/quickstarts/build-an
 1. ### Deploy
 
     ```console
-    $ gcloud beta run deploy --project dart-redirector --image gcr.io/dart-redirector/app
+    $ gcloud beta run deploy --project dart-redirector --image gcr.io/dart-redirector/app --platform managed
     ```
 
 ## To update SDK Triage areas
