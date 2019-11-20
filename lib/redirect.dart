@@ -53,7 +53,7 @@ String _checkMatch(RegExp re, String path) {
 List<String> _areaLabelCache;
 
 List<String> get _areaLabels => _areaLabelCache ??= List<String>.from(
-    jsonDecode(File('lib/sdk_labels.json').readAsStringSync()) as List)
+    jsonDecode(File('/app/lib/sdk_labels.json').readAsStringSync()) as List)
   ..removeWhere((label) => !label.startsWith('area-'));
 
 /// Find the redirect for the supplied [requestUri].
