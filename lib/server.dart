@@ -52,7 +52,7 @@ Disallow: /
         );
       case 'favicon.ico':
         return Response.ok(
-          File('static/favicon.ico').readAsBytesSync(),
+          File('/app/static/favicon.ico').readAsBytesSync(),
           headers: {'Content-Type': 'image/x-icon'},
         );
     }
