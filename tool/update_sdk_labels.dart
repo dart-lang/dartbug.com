@@ -5,7 +5,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:github/server.dart';
+import 'package:github/github.dart';
 
 Future main() async {
   final gitHub = GitHub();
