@@ -43,6 +43,7 @@ Disallow: /
           'notFounds': _notFound,
           'info': _infoRequests,
           'robot.txt': _robotTxt,
+          'Dart version': Platform.version,
           'request headers': SplayTreeMap.of(request.headers),
         };
 
