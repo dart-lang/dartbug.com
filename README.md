@@ -23,7 +23,7 @@ Following instructions at https://cloud.google.com/run/docs/quickstarts/build-an
 1. ### Deploy
 
     ```console
-    $ gcloud run deploy app --project dart-redirector --image gcr.io/dart-redirector/app --platform managed
+    $ gcloud run deploy app --project dart-redirector --image gcr.io/dart-redirector/app --platform managed --max-instances=1 --timeout=10s
     ```
 
 ## To update SDK Triage areas
