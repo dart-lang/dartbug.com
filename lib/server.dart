@@ -37,7 +37,7 @@ Disallow: /
       case '\$info':
         _infoRequests++;
 
-        var data = {
+        final data = {
           'since boot': _stopwatch.elapsed.toString(),
           'redirects': _redirects,
           'notFounds': _notFound,
@@ -59,7 +59,7 @@ Disallow: /
     }
   }
 
-  var location = findRedirect(request.requestedUri);
+  final location = findRedirect(request.requestedUri);
   if (location != null) {
     _redirects++;
     return Response.found(location);

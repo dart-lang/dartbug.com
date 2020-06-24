@@ -10,7 +10,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
 Future main() async {
-  var server = await serve(
+  final server = await serve(
       const Pipeline().addMiddleware(logRequests()).addHandler(handler),
       InternetAddress.loopbackIPv4,
       8080);

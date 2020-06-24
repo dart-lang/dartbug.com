@@ -11,7 +11,7 @@ const organization = 'dart-lang';
 const repository = 'sdk';
 
 // Redirect URIs
-final _rootUri = '$gitHub/$organization/$repository';
+const _rootUri = '$gitHub/$organization/$repository';
 final _listIssues = Uri.parse('$_rootUri/issues');
 final _showIssue = Uri.parse('$_rootUri/issues/');
 final _newIssue = Uri.parse('$_rootUri/issues/new');
@@ -42,7 +42,7 @@ final _matchers = <RegExp, Uri Function(String)>{
 };
 
 String _checkMatch(RegExp re, String path) {
-  var match = re.firstMatch(path);
+  final match = re.firstMatch(path);
   if (match != null) {
     return match.group(match.groupCount);
   } else {
@@ -65,7 +65,7 @@ Uri findRedirect(Uri requestUri) {
   }
 
   for (var entry in _matchers.entries) {
-    var match = _checkMatch(entry.key, requestUri.path);
+    final match = _checkMatch(entry.key, requestUri.path);
     if (match != null) {
       return entry.value(match);
     }

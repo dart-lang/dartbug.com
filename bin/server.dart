@@ -11,7 +11,7 @@ import 'package:shelf/shelf_io.dart';
 
 Future main() async {
   // Find port to listen on from environment variable.
-  var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
+  final port = int.tryParse(Platform.environment['PORT'] ?? '8080');
 
   var pipeline = const Pipeline();
 
@@ -32,7 +32,7 @@ Future main() async {
   }
 
   // Serve handler on given port.
-  var server = await serve(
+  final server = await serve(
     pipeline.addHandler(handler),
     listenAddress,
     port,
