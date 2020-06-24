@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dartbug/server.dart';
+import 'package:dartbug/utils.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
@@ -14,11 +15,6 @@ Future main() async {
   final port = int.tryParse(Platform.environment['PORT'] ?? '8080');
 
   var pipeline = const Pipeline();
-
-  final kEntries = Platform.environment.entries
-      .where((e) => e.key.startsWith('K_'))
-      .map((e) => '${e.key}\t${e.value}')
-      .toList();
 
   InternetAddress listenAddress;
 

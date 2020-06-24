@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 
 import 'redirect.dart';
+import 'utils.dart';
 
 int _infoRequests = 0;
 int _redirects = 0;
@@ -53,7 +54,7 @@ Disallow: /
         );
       case 'favicon.ico':
         return Response.ok(
-          File('/app/static/favicon.ico').readAsBytesSync(),
+          File(fixPath('static/favicon.ico')).readAsBytesSync(),
           headers: {'Content-Type': 'image/x-icon'},
         );
     }

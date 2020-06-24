@@ -5,6 +5,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'utils.dart';
+
 // Environment constants
 const gitHub = 'https://github.com';
 const organization = 'dart-lang';
@@ -53,8 +55,10 @@ String _checkMatch(RegExp re, String path) {
 List<String> _areaLabelCache;
 
 List<String> get _areaLabels => _areaLabelCache ??= List<String>.from(
-    jsonDecode(File('/app/lib/sdk_labels.json').readAsStringSync()) as List)
-  ..removeWhere((label) => !label.startsWith('area-'));
+      jsonDecode(
+        File(fixPath('lib/sdk_labels.json')).readAsStringSync(),
+      ) as List,
+    )..removeWhere((label) => !label.startsWith('area-'));
 
 /// Find the redirect for the supplied [requestUri].
 ///
