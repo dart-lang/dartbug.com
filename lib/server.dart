@@ -32,7 +32,7 @@ Response _handler(Request request) {
         return Response.ok(
           r'''
 User-agent: *
-Disallow: /
+Allow: /
 ''',
         );
       case '\$info':
