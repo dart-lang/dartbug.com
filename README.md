@@ -1,16 +1,25 @@
 Simple redirector to the Dart issue tracker.
 
-    http://dartbug.com                      --> issues list
-    http://dartbug.com/new                  --> new issue template
-    http://dartbug.com/<number>             --> specific issue
-    http://dartbug.com/opened/<user-id>     --> issues opened by github user <user-id>
-    http://dartbug.com/assigned/<user-id>   --> issues assigned to github user <user-id>
-    http://dartbug.com/area/<area>          --> issues in <area> (i.e., tagged with label 'area-<area>')
-    http://dartbug.com/triage               --> issues in the Dart SDK without an `area-<area>` label assigned
+    dartbug.com                      --> issues list
+    dartbug.com/new                  --> new issue template
+    dartbug.com/<number>             --> specific issue
+    dartbug.com/opened/<user-id>     --> issues opened by github user <user-id>
+    dartbug.com/assigned/<user-id>   --> issues assigned to github user <user-id>
+    dartbug.com/area/<area>          --> issues in <area> (i.e., tagged with label 'area-<area>')
+    dartbug.com/triage               --> issues in the Dart SDK without an `area-<area>` label assigned
 
 See the [LICENSE](LICENSE) file.
 
-## To Deploy
+## Continuous deployment from Git using Cloud Build
+
+The `dart-redirector` project is configured to deploy this application on every
+push to `master` of [the repository](https://github.com/dart-lang/dartbug.com).
+
+See
+[the documentation](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build)
+for details.
+
+## Manual Deploy
 
 Following instructions at https://cloud.google.com/run/docs/quickstarts/build-and-deploy:
 
