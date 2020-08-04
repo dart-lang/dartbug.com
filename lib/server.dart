@@ -63,7 +63,7 @@ Allow: /
   final location = findRedirect(request.requestedUri);
   if (location != null) {
     _redirects++;
-    return Response.found(location);
+    return Response.movedPermanently(location);
   } else {
     _notFound++;
     return Response.notFound("""
