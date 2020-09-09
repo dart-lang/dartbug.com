@@ -1,6 +1,7 @@
 [
  "Epic",
  "NNBD",
+ "NNBD-beta-blocker",
  "P0",
  "P1",
  "P2",
@@ -186,6 +187,7 @@
  "pkg-telemetry",
  "pkg-vm-service",
  "pkg-vm-snapshot-analysis",
+ "postmortem",
  "preview-dart-2",
  "pub-delete-request",
  "release blocker",
@@ -202,6 +204,7 @@
  "type-question",
  "type-security",
  "type-task",
+ "type-test",
  "unfork",
  "vm-aot-code-size",
  "vm-debugger",
