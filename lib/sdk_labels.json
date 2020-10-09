@@ -1,7 +1,6 @@
 [
  "Epic",
  "NNBD",
- "NNBD-beta-blocker",
  "P0",
  "P1",
  "P2",
@@ -54,6 +53,7 @@
  "area-vm",
  "area-web",
  "blocked",
+ "breaking-change",
  "breaking-change-request",
  "browser-chrome",
  "browser-firefox",
@@ -91,6 +91,7 @@
  "customer-pub",
  "customer-vm",
  "dart-1-removal",
+ "dart-cli-fix",
  "dart2js-compile-time",
  "dart2js-crash",
  "dart2js-ddc-discrepancy",
@@ -217,6 +218,7 @@
  "vm-technical-debt",
  "web-dart2js",
  "web-dev-compiler",
+ "web-eval",
  "web-js-interop",
  "web-libraries",
  "web-platform"
