@@ -29,7 +29,9 @@ final _matchers = <RegExp, Uri Function(String)>{
   RegExp(r'^/opened/([A-Za-z0-9\-]+)$'): _openedIssues.resolve,
   RegExp(r'^/area/([A-Za-z0-9\-]+)$'): (match) => _listIssues.replace(
         queryParameters: {
-          'label': 'area-$match',
+          'q': [
+            'label:area-$match',
+          ].join(' '),
         },
       ),
   RegExp(r'^/triage$', caseSensitive: false): (_) => _listIssues.replace(
