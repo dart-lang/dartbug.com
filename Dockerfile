@@ -1,29 +1,22 @@
-## Make a self-contained executable out of the application.
-FROM google/dart AS dart-runtime
+# Specify the Dart SDK base image version using dart:<version> (ex: dart:2.12)
+FROM dart:2.12 AS build
+
+# Resolve app dependencies.
 WORKDIR /app
-ADD pubspec.* /app/
-RUN pub get
-ADD bin /app/bin/
-ADD lib /app/lib/
-ADD static /app/static/
-RUN dart2native /app/bin/server.dart -o /app/bin/server
+COPY pubspec.* .
+RUN dart pub get
 
-## Build a bare minimum image for serving.
+# Copy app source code and AOT compile it.
+COPY . .
+RUN dart pub get --offline
+RUN dart compile exe bin/server.dart -o /server
+
+# Build minimal serving image from AOT-compiled `/server` and required system
+# libraries and configuration files stored in `/runtime/` from the build stage.
 FROM scratch
+COPY --from=build /runtime/ /
+COPY --from=build /server /bin/
 
-# Server and server dependencies.
-COPY --from=dart-runtime /app/bin/server /app/bin/server
-COPY --from=dart-runtime /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
-COPY --from=dart-runtime /lib/x86_64-linux-gnu/libc.so.6 /lib/x86_64-linux-gnu/libc.so.6
-COPY --from=dart-runtime /lib/x86_64-linux-gnu/libm.so.6 /lib/x86_64-linux-gnu/libm.so.6
-COPY --from=dart-runtime /lib/x86_64-linux-gnu/libpthread.so.0 /lib/x86_64-linux-gnu/libpthread.so.0
-COPY --from=dart-runtime /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/libdl.so.2
-COPY --from=dart-runtime /lib/x86_64-linux-gnu/librt.so.1 /lib/x86_64-linux-gnu/librt.so.1
-
-# Other files.
-COPY --from=dart-runtime /app/static/favicon.ico /app/static/favicon.ico
-COPY --from=dart-runtime /app/lib/sdk_labels.json /app/lib/sdk_labels.json
-
-## Setup for serving.
-ENTRYPOINT ["/app/bin/server"]
+# Start server.
 EXPOSE 8080
+CMD ["/bin/server"]
