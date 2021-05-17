@@ -6,6 +6,7 @@
  "P2",
  "P3",
  "P4",
+ "analyzer-analysis-options",
  "analyzer-api",
  "analyzer-ast-builder",
  "analyzer-benchmarks",
@@ -94,6 +95,7 @@
  "customer-vm",
  "dart-1-removal",
  "dart-cli-analyze",
+ "dart-cli-compile",
  "dart-cli-create",
  "dart-cli-fix",
  "dart-cli-format",
@@ -231,5 +233,6 @@
  "web-eval",
  "web-js-interop",
  "web-libraries",
- "web-platform"
+ "web-platform",
+ "web-techical-debt"
 ]

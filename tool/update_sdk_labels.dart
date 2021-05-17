@@ -17,7 +17,7 @@ Future main() async {
 
     final labelValues = labels.map((label) => label.name).toList();
 
-    File('lib/sdk_labels.json').writeAsStringSync(
+    File('static/sdk_labels.json').writeAsStringSync(
         const JsonEncoder.withIndent(' ').convert(labelValues));
   } finally {
     gitHub.dispose();

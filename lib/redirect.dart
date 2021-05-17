@@ -5,8 +5,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'utils.dart';
-
 // Environment constants
 const gitHub = 'https://github.com';
 const organization = 'dart-lang';
@@ -54,7 +52,7 @@ String? _checkMatch(RegExp re, String path) {
 
 late final List<String> _areaLabels = List<String>.from(
   jsonDecode(
-    File(fixPath('lib/sdk_labels.json')).readAsStringSync(),
+    File('static/sdk_labels.json').readAsStringSync(),
   ) as List,
 )..removeWhere((label) => !label.startsWith('area-'));
 
