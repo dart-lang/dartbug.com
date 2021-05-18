@@ -53,11 +53,11 @@ void main() {
   test('area', () {
     expect(
       findRedirect(Uri.parse('http://dartbug.com/area/Area-VM')).toString(),
-      '$gitHub/$organization/$repository/issues?label=area-Area-VM',
+      '$gitHub/$organization/$repository/issues?q=label%3Aarea-Area-VM',
     );
     expect(
       findRedirect(Uri.parse('http://dartbug.com/area/dart2js')).toString(),
-      '$gitHub/$organization/$repository/issues?label=area-dart2js',
+      '$gitHub/$organization/$repository/issues?q=label%3Aarea-dart2js',
     );
   });
 
