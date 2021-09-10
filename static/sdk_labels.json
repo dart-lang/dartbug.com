@@ -179,6 +179,7 @@
  "observatory-debugger",
  "os-android",
  "os-fuchsia",
+ "os-ios",
  "os-linux",
  "os-osx",
  "os-windows",
