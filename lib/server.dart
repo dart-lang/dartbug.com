@@ -65,13 +65,15 @@ Allow: /
     return Response.movedPermanently(location);
   } else {
     _notFound++;
-    return Response.notFound("""
+    return Response.notFound(
+      """
 I don't support redirecting path '${request.requestedUri.path}'
 
 Check out my source at https://github.com/dart-lang/dartbug.com
 
 Supported routes:
 ${routes.map((r) => '  $r').join('\n')}
-""");
+""",
+    );
   }
 }

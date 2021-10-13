@@ -11,8 +11,9 @@ import 'package:shelf/shelf_io.dart';
 
 Future main() async {
   final server = await serve(
-      const Pipeline().addMiddleware(logRequests()).addHandler(handler),
-      InternetAddress.loopbackIPv4,
-      8080);
+    const Pipeline().addMiddleware(logRequests()).addHandler(handler),
+    InternetAddress.loopbackIPv4,
+    8080,
+  );
   print('Listening on ${server.address.address}:${server.port}');
 }

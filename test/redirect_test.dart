@@ -44,10 +44,14 @@ void main() {
   });
 
   test('list issues', () {
-    expect(findRedirect(Uri.parse('http://dartbug.com')).toString(),
-        '$gitHub/$organization/$repository/issues');
-    expect(findRedirect(Uri.parse('http://dartbug.com/')).toString(),
-        '$gitHub/$organization/$repository/issues');
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com')).toString(),
+      '$gitHub/$organization/$repository/issues',
+    );
+    expect(
+      findRedirect(Uri.parse('http://dartbug.com/')).toString(),
+      '$gitHub/$organization/$repository/issues',
+    );
   });
 
   test('area', () {
@@ -64,8 +68,10 @@ void main() {
   test('triage', () {
     expect(
       findRedirect(Uri.parse('http://dartbug.com/triage')).toString(),
-      startsWith('https://github.com/dart-lang/sdk/issues?'
-          'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer'),
+      startsWith(
+        'https://github.com/dart-lang/sdk/issues?'
+        'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer',
+      ),
     );
   });
 }

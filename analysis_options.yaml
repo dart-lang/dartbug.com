@@ -8,6 +8,7 @@ linter:
   - always_declare_return_types
   - annotate_overrides
   - avoid_catching_errors
+  - avoid_dynamic_calls
   - avoid_empty_else
   - avoid_function_literals_in_foreach_calls
   - avoid_init_to_null
@@ -81,6 +82,7 @@ linter:
   - prefer_void_to_null
   - provide_deprecation_message
   - recursive_getters
+  - require_trailing_commas
   - slash_for_doc_comments
   - sort_pub_dependencies
   - test_types_in_equals
