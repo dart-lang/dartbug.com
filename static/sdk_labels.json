@@ -55,6 +55,10 @@
  "browser-firefox",
  "browser-ie",
  "browser-safari",
+ "C0",
+ "C1",
+ "C2",
+ "C3",
  "cherry-pick-review",
  "cla: no",
  "cla: yes",
@@ -197,6 +201,7 @@
  "pkg-fixnum",
  "pkg-js",
  "pkg-meta",
+ "pkg-native-stack-traces",
  "pkg-sourcemaps",
  "pkg-telemetry",
  "pkg-vm-service",
@@ -237,5 +242,8 @@
  "web-js-interop",
  "web-libraries",
  "web-platform",
- "web-techical-debt"
+ "web-techical-debt",
+ "web-triage-0",
+ "web-triage-1",
+ "web-triage-2"
 ]
