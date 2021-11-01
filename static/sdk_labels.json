@@ -239,6 +239,7 @@
  "web-dart2js",
  "web-dev-compiler",
  "web-eval",
+ "web-infrastructure",
  "web-js-interop",
  "web-libraries",
  "web-platform",
