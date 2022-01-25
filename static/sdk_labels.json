@@ -30,6 +30,7 @@
  "area-benchmarks",
  "area-build",
  "area-dart-cli",
+ "area-dart2wasm",
  "area-documentation",
  "area-front-end",
  "area-google3",
