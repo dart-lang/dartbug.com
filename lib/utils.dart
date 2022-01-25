@@ -51,7 +51,7 @@ Future<void> terminateRequestFuture() {
 
   // sigIntSub is copied below to avoid a race condition - ignoring this lint
   // ignore: cancel_subscriptions
-  StreamSubscription? sigIntSub, sigTermSub;
+  StreamSubscription<ProcessSignal>? sigIntSub, sigTermSub;
 
   Future<void> signalHandler(ProcessSignal signal) async {
     print('Received signal $signal - closing');

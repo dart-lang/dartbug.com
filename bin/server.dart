@@ -8,7 +8,7 @@ import 'package:dartbug/server.dart';
 import 'package:dartbug/utils.dart';
 import 'package:shelf/shelf.dart';
 
-Future main() async {
+Future<void> main() async {
   var pipeline = const Pipeline();
 
   if (kEntries.isNotEmpty) {

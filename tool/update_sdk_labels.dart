@@ -7,7 +7,7 @@ import 'dart:io';
 
 import 'package:github/github.dart';
 
-Future main() async {
+Future<void> main() async {
   final gitHub = GitHub();
 
   try {

@@ -9,7 +9,7 @@ import 'package:dartbug/server.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
-Future main() async {
+Future<void> main() async {
   final server = await serve(
     const Pipeline().addMiddleware(logRequests()).addHandler(handler),
     InternetAddress.loopbackIPv4,
