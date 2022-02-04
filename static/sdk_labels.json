@@ -51,6 +51,7 @@
  "area-web",
  "blocked",
  "breaking-change",
+ "breaking-change-approved",
  "breaking-change-request",
  "browser-chrome",
  "browser-firefox",
