@@ -65,13 +65,53 @@ void main() {
     );
   });
 
-  test('triage', () {
-    expect(
-      findRedirect(Uri.parse('http://dartbug.com/triage')).toString(),
-      startsWith(
-        'https://github.com/dart-lang/sdk/issues?'
-        'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer',
-      ),
-    );
+  group('sdk', () {
+    test('triage', () {
+      expect(
+        findRedirect(Uri.parse('http://dartbug.com/triage')).toString(),
+        equalsIgnoringCase('https://dartbug.com/triage/sdk'),
+      );
+    });
+
+    test('triage/sdk', () {
+      expect(
+        findRedirect(Uri.parse('https://dartbug.com/triage/sdk')).toString(),
+        startsWith(
+          'https://github.com/dart-lang/sdk/issues?'
+          'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer',
+        ),
+      );
+    });
+  });
+
+  group('core packages', () {
+    test('triage/core', () {
+      expect(
+        findRedirect(Uri.parse('http://dartbug.com/triage/core')).toString(),
+        equalsIgnoringCase('https://dartbug.com/triage/core/issues'),
+      );
+    });
+
+    test('triage/core/issues', () {
+      expect(
+        findRedirect(Uri.parse('https://dartbug.com/triage/core/issues'))
+            .toString(),
+        startsWith(
+          'https://github.com/issues?q=is%3Aissue+is%3Aopen+-label%3Abug'
+          '+-label%3Aenhancement+created',
+        ),
+      );
+    });
+
+    test('triage/core/prs', () {
+      expect(
+        findRedirect(Uri.parse('https://dartbug.com/triage/core/prs'))
+            .toString(),
+        startsWith(
+          'https://github.com/issues?q=is%3Apr+is%3Aopen'
+          '+repo%3Adart-lang%2Fargs+',
+        ),
+      );
+    });
   });
 }

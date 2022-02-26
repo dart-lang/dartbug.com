@@ -6,7 +6,14 @@ Simple redirector to the Dart issue tracker.
     dartbug.com/opened/<user-id>     --> issues opened by github user <user-id>
     dartbug.com/assigned/<user-id>   --> issues assigned to github user <user-id>
     dartbug.com/area/<area>          --> issues in <area> (i.e., tagged with label 'area-<area>')
-    dartbug.com/triage               --> issues in the Dart SDK without an `area-<area>` label assigned
+    dartbug.com/triage               --> an alias for 'triage/sdk'
+    dartbug.com/triage/sdk           --> issues in the Dart SDK without an `area-<area>` label assigned
+    dartbug.com/triage/core          --> an alias for 'triage/core/issues'
+    dartbug.com/triage/core/issues   --> untriaged issues for the Dart core packages (dart.dev published)
+    dartbug.com/triage/core/prs      --> untriaged PRs for the Dart core packages (dart.dev published)
+    dartbug.com/triage/tools         --> an alias for 'triage/tools/issues'
+    dartbug.com/triage/tools/issues  --> untriaged issues for the Dart tools packages (tools.dart.dev published)
+    dartbug.com/triage/tools/prs     --> untriaged PRs for the Dart tools packages (tools.dart.dev published)
 
 See the [LICENSE](LICENSE) file.
 
