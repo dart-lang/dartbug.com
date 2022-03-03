@@ -87,7 +87,7 @@ yaml,dart-lang/yaml,tools.dart.dev
 # package:linter is triaged by pq@
 # linter,dart-lang/linter,tools.dart.dev
 
-# package:linter is triaged by the pub team
+# package:pana is triaged by the Pub team
 # pana,dart-lang/pana,tools.dart.dev
 
 # package:test_reflective_loader is triaged by scheglov@
