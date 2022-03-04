@@ -62,7 +62,8 @@ Allow: /
   final location = findRedirect(request.requestedUri);
   if (location != null) {
     _redirects++;
-    return Response.movedPermanently(location);
+    // Issue a 302 / Found ('Moved temporarily') redirect.
+    return Response.found(location);
   } else {
     _notFound++;
     return Response.notFound(
