@@ -163,12 +163,12 @@ Uri? findRedirect(Uri requestUri) {
 List<String> parsePackageInfo(File file) {
   return file
       .readAsLinesSync()
-      .sublist(1)
       .where((line) => line.isNotEmpty)
+      .where((line) => !line.startsWith('#'))
       .map((String line) {
-        // "args,dart-lang,args,dart.dev,..."
+        // "args,dart-lang/args,dart.dev"
         final info = line.split(',');
-        return PackageInfo(info[0], '${info[1]}/${info[2]}');
+        return PackageInfo(info[0], info[1]);
       })
       .where((package) => package.repo != 'dart-lang/sdk')
       .map((package) => package.repo)
