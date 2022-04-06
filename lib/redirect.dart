@@ -55,6 +55,7 @@ final _matchers = <RegExp, Uri Function(String)>{
   // core packages triage
   RegExp(r'^/triage/core$'): (_) => Uri.parse('$dartBug/triage/core/issues'),
   RegExp(r'^/triage/core/issues$'): (_) {
+    // Issues opened in the last 30 days not marked as bugs or enhancements.
     return Uri.parse('$gitHub/issues').replace(
       queryParameters: {
         'q': [
@@ -69,16 +70,16 @@ final _matchers = <RegExp, Uri Function(String)>{
     );
   },
   RegExp(r'^/triage/core/prs$'): (_) {
-    // TODO: This returns all open PRs; we need to determine what an inbox query
-    // looks like for PRs (new PRs? New and 'needs-attention'?).
+    // PRs opened in the last 30 days that haven't been assigned a reviewer and
+    // that aren't draft PRs.
     return Uri.parse('$gitHub/issues').replace(
       queryParameters: {
         'q': [
           'is:pr',
           'is:open',
-          // 'created:>$dateOneMonth',
-          // '-label:bug',
-          // '-label:enhancement',
+          'review:none',
+          '-draft:true',
+          'created:>$dateOneMonth',
           ...corePackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },
@@ -88,6 +89,7 @@ final _matchers = <RegExp, Uri Function(String)>{
   // tools packages triage
   RegExp(r'^/triage/tools$'): (_) => Uri.parse('$dartBug/triage/tools/issues'),
   RegExp(r'^/triage/tools/issues$'): (_) {
+    // Issues opened in the last 30 days not marked as bugs or enhancements.
     return Uri.parse('$gitHub/issues').replace(
       queryParameters: {
         'q': [
@@ -102,16 +104,16 @@ final _matchers = <RegExp, Uri Function(String)>{
     );
   },
   RegExp(r'^/triage/tools/prs$'): (_) {
-    // TODO: This returns all open PRs; we need to determine what an inbox query
-    // looks like for PRs (new PRs? New and 'needs-attention'?).
+    // PRs opened in the last 30 days that haven't been assigned a reviewer and
+    // that aren't draft PRs.
     return Uri.parse('$gitHub/issues').replace(
       queryParameters: {
         'q': [
           'is:pr',
           'is:open',
-          // 'created:>$dateOneMonth',
-          // '-label:bug',
-          // '-label:enhancement',
+          'review:none',
+          '-draft:true',
+          'created:>$dateOneMonth',
           ...toolsPackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },
