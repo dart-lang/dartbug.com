@@ -62,7 +62,7 @@ final _matchers = <RegExp, Uri Function(String)>{
           'is:open',
           '-label:bug',
           '-label:enhancement',
-          'created:>$dateTwoWeeks',
+          'created:>$dateOneMonth',
           ...corePackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },
@@ -76,7 +76,7 @@ final _matchers = <RegExp, Uri Function(String)>{
         'q': [
           'is:pr',
           'is:open',
-          // 'created:>$dateTwoWeeks',
+          // 'created:>$dateOneMonth',
           // '-label:bug',
           // '-label:enhancement',
           ...corePackages.map((repo) => 'repo:$repo'),
@@ -95,7 +95,7 @@ final _matchers = <RegExp, Uri Function(String)>{
           'is:open',
           '-label:bug',
           '-label:enhancement',
-          'created:>$dateTwoWeeks',
+          'created:>$dateOneMonth',
           ...toolsPackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },
@@ -109,7 +109,7 @@ final _matchers = <RegExp, Uri Function(String)>{
         'q': [
           'is:pr',
           'is:open',
-          // 'created:>$dateTwoWeeks',
+          // 'created:>$dateOneMonth',
           // '-label:bug',
           // '-label:enhancement',
           ...toolsPackages.map((repo) => 'repo:$repo'),
@@ -184,9 +184,9 @@ class PackageInfo {
   PackageInfo(this.name, this.repo);
 }
 
-/// Return the current date, less 2 weeks, in '2022-01-15' format.
-String get dateTwoWeeks {
-  final date = DateTime.now().subtract(const Duration(days: 14));
+/// Return the current date, less ~1 month, in '2022-01-15' format.
+String get dateOneMonth {
+  final date = DateTime.now().subtract(const Duration(days: 30));
   return '${date.year}-'
       '${date.month.toString().padLeft(2, '0')}-'
       '${date.day.toString().padLeft(2, '0')}';
