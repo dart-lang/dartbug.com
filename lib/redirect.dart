@@ -77,9 +77,9 @@ final _matchers = <RegExp, Uri Function(String)>{
         'q': [
           'is:pr',
           'is:open',
-          'created:>$dateOneMonth',
           'review:none',
           '-draft:true',
+          'created:>$dateOneMonth',
           ...corePackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },
@@ -111,9 +111,9 @@ final _matchers = <RegExp, Uri Function(String)>{
         'q': [
           'is:pr',
           'is:open',
-          'created:>$dateOneMonth',
           'review:none',
           '-draft:true',
+          'created:>$dateOneMonth',
           ...toolsPackages.map((repo) => 'repo:$repo'),
         ].join(' '),
       },

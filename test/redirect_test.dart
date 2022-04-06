@@ -109,7 +109,7 @@ void main() {
             .toString(),
         startsWith(
           'https://github.com/issues?q=is%3Apr+is%3Aopen'
-          '+repo%3Adart-lang%2Fargs+',
+          '+review%3Anone+-draft%3Atrue+created',
         ),
       );
     });
