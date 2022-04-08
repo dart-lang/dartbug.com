@@ -109,7 +109,7 @@ void main() {
             .toString(),
         startsWith(
           'https://github.com/issues?q=is%3Apr+is%3Aopen'
-          '+review%3Anone+-draft%3Atrue+created',
+          '+review%3Anone+draft%3Afalse+created',
         ),
       );
     });
