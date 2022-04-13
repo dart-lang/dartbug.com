@@ -15,6 +15,7 @@ int _redirects = 0;
 int _notFound = 0;
 int _robotTxt = 0;
 final _stopwatch = Stopwatch();
+final _agents = <String, int>{};
 
 Handler get handler {
   _stopwatch.start();
@@ -22,7 +23,10 @@ Handler get handler {
 }
 
 Response _handler(Request request) {
-  _stopwatch.start();
+  final agent = request.headers['user-agent'];
+  if (agent != null) {
+    _agents[agent] = (_agents[agent] ?? 0) + 1;
+  }
 
   if (request.requestedUri.pathSegments.length == 1) {
     switch (request.requestedUri.pathSegments.single) {
@@ -39,12 +43,16 @@ Allow: /
 
         final data = {
           'since boot': _stopwatch.elapsed.toString(),
-          'redirects': _redirects,
-          'notFounds': _notFound,
-          'info': _infoRequests,
-          'robot.txt': _robotTxt,
+          'counts': {
+            'redirects': _redirects,
+            'notFounds': _notFound,
+            'info': _infoRequests,
+            'robot.txt': _robotTxt,
+          },
           'Dart version': Platform.version,
           'request headers': SplayTreeMap.of(request.headers),
+          'Environment': Platform.environment,
+          'agents': _agents,
         };
 
         return Response.ok(
