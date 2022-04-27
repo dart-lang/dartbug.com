@@ -98,7 +98,7 @@ void main() {
             .toString(),
         startsWith(
           'https://github.com/issues?q=is%3Aissue+is%3Aopen+-label%3Abug'
-          '+-label%3Aenhancement+created',
+          '+-label%3Aenhancement+',
         ),
       );
     });
