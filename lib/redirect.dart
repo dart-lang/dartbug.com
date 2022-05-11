@@ -134,15 +134,15 @@ String? _checkMatch(RegExp re, String path) {
   }
 }
 
-late final List<String> _areaLabels = List<String>.from(
+final List<String> _areaLabels = List<String>.from(
   jsonDecode(
     File('static/sdk_labels.json').readAsStringSync(),
   ) as List,
 )..removeWhere((label) => !label.startsWith('area-'));
 
-late final List<String> corePackages =
+final List<String> corePackages =
     parsePackageInfo(File('static/core_packages.csv'));
-late final List<String> toolsPackages =
+final List<String> toolsPackages =
     parsePackageInfo(File('static/tools_packages.csv'));
 
 /// Find the redirect for the supplied [requestUri].
