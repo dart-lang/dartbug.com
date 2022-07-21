@@ -6,6 +6,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:shelf/shelf.dart';
 
 import 'redirect.dart';
@@ -15,7 +16,7 @@ int _redirects = 0;
 int _notFound = 0;
 int _robotTxt = 0;
 final _stopwatch = Stopwatch();
-final _agents = <String, int>{};
+final _agents = SplayTreeMap<String, int>(compareAsciiLowerCase);
 
 Handler get handler {
   _stopwatch.start();
@@ -50,8 +51,10 @@ Allow: /
             'robot.txt': _robotTxt,
           },
           'Dart version': Platform.version,
-          'request headers': SplayTreeMap.of(request.headers),
-          'Environment': Platform.environment,
+          'request headers':
+              SplayTreeMap.of(request.headers, compareAsciiLowerCase),
+          'Environment':
+              SplayTreeMap.of(Platform.environment, compareAsciiLowerCase),
           'agents': _agents,
         };
 
