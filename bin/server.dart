@@ -18,5 +18,5 @@ Future<void> main() async {
     pipeline = pipeline.addMiddleware(logRequests());
   }
 
-  await serveHandler(handler);
+  await serveHandler(pipeline.addHandler(handler));
 }
