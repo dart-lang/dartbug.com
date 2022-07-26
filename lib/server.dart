@@ -20,8 +20,18 @@ final _agents = SplayTreeMap<String, int>(compareAsciiLowerCase);
 
 Handler get handler {
   _stopwatch.start();
-  return _handler;
+  return _xServedBy.addHandler(_handler);
 }
+
+/// Experimenting with `X-Powered-By` header to see if it flows through
+/// Google's front-end server.
+///
+/// See https://webtechsurvey.com/response-header/x-powered-by
+Middleware get _xServedBy => (Handler source) => (Request request) async {
+      final response = await source(request);
+      return response
+          .change(headers: {'X-Powered-By': 'Dart via package:shelf'});
+    };
 
 Response _handler(Request request) {
   final agent = request.headers['user-agent'];
