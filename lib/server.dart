@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
+import 'package:gcp/gcp.dart';
 import 'package:shelf/shelf.dart';
 
 import 'redirect.dart';
@@ -77,7 +78,8 @@ Allow: /
     return Response.found(location);
   } else {
     _notFound++;
-    return Response.notFound(
+    throw BadRequestException(
+      404,
       """
 I don't support redirecting path '${request.requestedUri.path}'
 

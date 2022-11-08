@@ -12,10 +12,10 @@ Future<void> main() async {
   String? projectId;
   try {
     projectId = await projectIdFromMetadataServer();
-    currentLogger.debug('Running on Google cloud! Project ID: $projectId');
+    print('Running on Google cloud! Project ID: $projectId');
   } on BadConfigurationException {
     // NOOP - not on cloud!
-    currentLogger.debug('Not running on Google Cloud.');
+    print('Not running on Google Cloud.');
   }
 
   await serveHandler(
