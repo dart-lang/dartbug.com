@@ -5,18 +5,20 @@
 import 'dart:async';
 
 import 'package:dartbug/server.dart';
-import 'package:dartbug/utils.dart';
+import 'package:gcp/gcp.dart';
 import 'package:shelf/shelf.dart';
 
 Future<void> main() async {
-  var pipeline = const Pipeline();
-
-  if (kEntries.isNotEmpty) {
-    print('Assuming environment is Cloud Run\n${kEntries.join('\n')}');
-  } else {
-    // Only add log middleware if we're not on Cloud Run
-    pipeline = pipeline.addMiddleware(logRequests());
+  String? projectId;
+  try {
+    projectId = await projectIdFromMetadataServer();
+    currentLogger.debug('Running on Google cloud! Project ID: $projectId');
+  } on BadConfigurationException {
+    // NOOP - not on cloud!
+    currentLogger.debug('Not running on Google Cloud.');
   }
 
-  await serveHandler(pipeline.addHandler(handler));
+  await serveHandler(
+    createLoggingMiddleware(projectId: projectId).addHandler(handler),
+  );
 }
