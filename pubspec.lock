@@ -101,10 +101,10 @@ packages:
     dependency: "direct dev"
     description:
       name: github
-      sha256: "2f78b5cdb21fdc54740a2476344718ab4d1eb59971fbac7962714b1a87fa9862"
+      sha256: "5658b01529dc9078f7d2b8b48abd01fee75ff87626c98b5596b9bf5517b8f431"
       url: "https://pub.dev"
     source: hosted
-    version: "9.9.0"
+    version: "9.10.1"
   glob:
     dependency: transitive
     description:
@@ -365,10 +365,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f24bfb5ea0b015205e583dda73d67de44785d583ad0889929deaff3a32359ff5
+      sha256: eb3cf3f45fc1500ae30481ac9ab788302fa5e8edc3f3eaddf183945ee93a8bf3
       url: "https://pub.dev"
     source: hosted
-    version: "11.1.0"
+    version: "11.2.0"
   watcher:
     dependency: transitive
     description:
@@ -402,4 +402,4 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.0 <3.0.0"
+  dart: ">=2.19.0 <4.0.0"
