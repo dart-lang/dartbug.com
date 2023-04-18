@@ -11,14 +11,12 @@ Future<void> main() async {
   final gitHub = GitHub();
 
   try {
-    final labels = await gitHub.issues
-        .listLabels(RepositorySlug('dart-lang', 'sdk'))
-        .toList();
-
-    final labelValues = labels.map((label) => label.name).toList();
+    final sdkLabelRequest =
+        gitHub.issues.listLabels(RepositorySlug('dart-lang', 'sdk'));
+    final labelNames = [await for (var label in sdkLabelRequest) label.name];
 
     File('static/sdk_labels.json').writeAsStringSync(
-      const JsonEncoder.withIndent(' ').convert(labelValues),
+      '${const JsonEncoder.withIndent(' ').convert(labelNames)}\n',
     );
   } finally {
     gitHub.dispose();
