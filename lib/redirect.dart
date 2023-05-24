@@ -32,15 +32,18 @@ final _languageOpenedIssues = Uri.parse('$_languageRootUri/issues/created_by/');
 Iterable<String> get routes => _matchers.keys.map((r) => r.pattern);
 
 final _matchers = <RegExp, Uri Function(Match)>{
+  // Operations that also work on language repo.
   RegExp(r'^/(l(?:anguage)?)$'): (_) => _languageListIssues,
   RegExp(r'^/(l(?:anguage)?/)?([0-9]+)$'):
       _resolveLastChoose(_showIssue, _languageShowIssue),
-  RegExp(r'^/(l(?:anguage)?/)?new$', caseSensitive: false):
-      _resolveLastChoose(_newIssue, _languageNewIssue),
+  RegExp(r'^/(l(?:anguage)?/)?new$', caseSensitive: false): (match) =>
+      match[1] == null ? _newIssue : _languageNewIssue,
   RegExp(r'^/(l(?:anguage)?/)?assigned/([A-Za-z0-9\-]+)$'):
       _resolveLastChoose(_assignedIssues, _languageAssignedIssues),
   RegExp(r'^/(l(?:anguage)?/)?opened/([A-Za-z0-9\-]+)$'):
       _resolveLastChoose(_openedIssues, _languageOpenedIssues),
+
+  // SDK repo only.
   RegExp(r'^/area/([A-Za-z0-9\-]+)$'): (match) {
     return _listIssues.replace(
       queryParameters: {
