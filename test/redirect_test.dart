@@ -114,4 +114,62 @@ void main() {
       );
     });
   });
+
+  group('language repository', () {
+    const repository = 'language';
+
+    for (var prefix in ['l', 'language']) {
+      group('(/$prefix)', () {
+        test('issue number', () {
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/1234'))
+                .toString(),
+            '$gitHub/$organization/$repository/issues/1234',
+          );
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/-1234')),
+            isNull,
+          );
+        });
+
+        test('new issue', () {
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/new'))
+                .toString(),
+            '$gitHub/$organization/$repository/issues/new',
+          );
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/NEW'))
+                .toString(),
+            '$gitHub/$organization/$repository/issues/new',
+          );
+        });
+
+        test('assigned issue', () {
+          expect(
+            findRedirect(
+              Uri.parse('http://dartbug.com/$prefix/assigned/kevmoo'),
+            ).toString(),
+            '$gitHub/$organization/$repository/issues/assigned/kevmoo',
+          );
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/assigned/nex3'))
+                .toString(),
+            '$gitHub/$organization/$repository/issues/assigned/nex3',
+          );
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix/søren')),
+            isNull,
+          );
+        });
+
+        test('list issues', () {
+          expect(
+            findRedirect(Uri.parse('http://dartbug.com/$prefix')).toString(),
+            '$gitHub/$organization/$repository/issues',
+          );
+        });
+      });
+    }
+  });
 }

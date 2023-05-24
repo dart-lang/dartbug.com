@@ -14,6 +14,12 @@ Simple redirector to the Dart issue tracker.
     dartbug.com/triage/tools         --> an alias for 'triage/tools/issues'
     dartbug.com/triage/tools/issues  --> untriaged issues for the Dart tools packages (tools.dart.dev published)
     dartbug.com/triage/tools/prs     --> untriaged PRs for the Dart tools packages (tools.dart.dev published)
+    dartbug.com/language             --> issues list for language repo
+    dartbug.com/language/new         --> new issue template in language repo
+    dartbug.com/language/<nunmber>   --> specific issue in language repo
+    dartbug.com/language/opened/<user-id>   --> issues opened by github user <user-id> in language repo
+    dartbug.com/language/assigned/<user-id> --> issues assigned to github user <user-id> in language repo
+    dartbug.com/l                    --> shorthand for /language
 
 See the [LICENSE](LICENSE) file.
 
@@ -48,4 +54,3 @@ Following instructions at https://cloud.google.com/run/docs/quickstarts/build-an
 $ dart tool/update_sdk_labels.dart
 ```
 
-❓

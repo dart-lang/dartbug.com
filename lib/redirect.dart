@@ -11,6 +11,7 @@ import 'dart:io';
 const gitHub = 'https://github.com';
 const organization = 'dart-lang';
 const repository = 'sdk';
+const languageRepository = 'language';
 const dartBug = 'https://dartbug.com';
 
 // Redirect URIs
@@ -21,18 +22,33 @@ final _newIssue = Uri.parse('$_rootUri/issues/new');
 final _assignedIssues = Uri.parse('$_rootUri/issues/assigned/');
 final _openedIssues = Uri.parse('$_rootUri/issues/created_by/');
 
+const _languageRootUri = '$gitHub/$organization/$languageRepository';
+final _languageListIssues = Uri.parse('$_languageRootUri/issues');
+final _languageShowIssue = Uri.parse('$_languageRootUri/issues/');
+final _languageNewIssue = Uri.parse('$_languageRootUri/issues/new');
+final _languageAssignedIssues = Uri.parse('$_languageRootUri/issues/assigned/');
+final _languageOpenedIssues = Uri.parse('$_languageRootUri/issues/created_by/');
+
 Iterable<String> get routes => _matchers.keys.map((r) => r.pattern);
 
-final _matchers = <RegExp, Uri Function(String)>{
-  RegExp(r'^/([0-9]+)$'): _showIssue.resolve,
-  RegExp(r'^/new$', caseSensitive: false): (_) => _newIssue,
-  RegExp(r'^/assigned/([A-Za-z0-9\-]+)$'): _assignedIssues.resolve,
-  RegExp(r'^/opened/([A-Za-z0-9\-]+)$'): _openedIssues.resolve,
+final _matchers = <RegExp, Uri Function(Match)>{
+  // Operations that also work on language repo.
+  RegExp(r'^/(l(?:anguage)?)$'): (_) => _languageListIssues,
+  RegExp(r'^/(l(?:anguage)?/)?([0-9]+)$'):
+      _resolveLastChoose(_showIssue, _languageShowIssue),
+  RegExp(r'^/(l(?:anguage)?/)?new$', caseSensitive: false): (match) =>
+      match[1] == null ? _newIssue : _languageNewIssue,
+  RegExp(r'^/(l(?:anguage)?/)?assigned/([A-Za-z0-9\-]+)$'):
+      _resolveLastChoose(_assignedIssues, _languageAssignedIssues),
+  RegExp(r'^/(l(?:anguage)?/)?opened/([A-Za-z0-9\-]+)$'):
+      _resolveLastChoose(_openedIssues, _languageOpenedIssues),
+
+  // SDK repo only.
   RegExp(r'^/area/([A-Za-z0-9\-]+)$'): (match) {
     return _listIssues.replace(
       queryParameters: {
         'q': [
-          'label:area-$match',
+          'label:area-${match[1]}',
         ].join(' '),
       },
     );
@@ -125,14 +141,15 @@ final _matchers = <RegExp, Uri Function(String)>{
   },
 };
 
-String? _checkMatch(RegExp re, String path) {
-  final match = re.firstMatch(path);
-  if (match != null) {
-    return match.group(match.groupCount)!;
-  } else {
-    return null;
-  }
-}
+/// Resolves one of [base1] or [base2] against the last capture of `match`.
+///
+/// Chooses [base1] if the first capture (`match[1]`) is `null`,
+/// and [base2] otherwise.
+/// (The former is an SDK repo base, the latter a language repo base.)
+Uri Function(Match) _resolveLastChoose(Uri base1, Uri base2) => (Match match) {
+      return ((match[1] == null) ? base1 : base2)
+          .resolve(match[match.groupCount]!);
+    };
 
 final List<String> _areaLabels = List<String>.from(
   jsonDecode(
@@ -154,7 +171,7 @@ Uri? findRedirect(Uri requestUri) {
   }
 
   for (var entry in _matchers.entries) {
-    final match = _checkMatch(entry.key, requestUri.path);
+    final match = entry.key.firstMatch(requestUri.path);
     if (match != null) {
       return entry.value(match);
     }
