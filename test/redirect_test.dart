@@ -148,8 +148,8 @@ void main() {
         test('assigned issue', () {
           expect(
             findRedirect(
-                    Uri.parse('http://dartbug.com/$prefix/assigned/kevmoo'))
-                .toString(),
+              Uri.parse('http://dartbug.com/$prefix/assigned/kevmoo'),
+            ).toString(),
             '$gitHub/$organization/$repository/issues/assigned/kevmoo',
           );
           expect(
