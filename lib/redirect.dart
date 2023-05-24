@@ -147,8 +147,9 @@ final _matchers = <RegExp, Uri Function(Match)>{
 /// and [base2] otherwise.
 /// (The former is an SDK repo base, the latter a language repo base.)
 Uri Function(Match) _resolveLastChoose(Uri base1, Uri base2) => (Match match) {
-      return ((match[1] == null) ? base1 : base2)
-          .resolve(match[match.groupCount]!);
+      return ((match[1] == null) ? base1 : base2).resolve(
+        match[match.groupCount]!,
+      );
     };
 
 final List<String> _areaLabels = List<String>.from(
