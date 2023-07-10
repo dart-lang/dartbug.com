@@ -5,7 +5,7 @@ environment:
   sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
-  collection: ^1.16.0
+  collection: ^1.17.2
   gcp: ^0.1.0
   http: ^0.13.4
   shelf: ^1.0.0
