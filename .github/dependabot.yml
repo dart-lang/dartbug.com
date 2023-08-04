@@ -9,8 +9,11 @@ updates:
       interval: monthly
     labels:
       - autosubmit
+      - type-infra
 
   - package-ecosystem: pub
     directory: /
     schedule:
       interval: monthly
+    labels:
+      - type-infra
