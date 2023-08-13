@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
-import 'package:gcp/gcp.dart';
+import 'package:google_cloud/google_cloud.dart';
 import 'package:shelf/shelf.dart';
 
 import 'redirect.dart';

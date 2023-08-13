@@ -5,7 +5,7 @@
 import 'dart:async';
 
 import 'package:dartbug/server.dart';
-import 'package:gcp/gcp.dart';
+import 'package:google_cloud/google_cloud.dart';
 import 'package:shelf/shelf.dart';
 
 Future<void> main() async {
