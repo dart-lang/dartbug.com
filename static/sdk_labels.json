@@ -103,6 +103,7 @@
  "dart-1-removal",
  "dart-cli-analyze",
  "dart-cli-bug",
+ "dart-cli-build",
  "dart-cli-compilation-server",
  "dart-cli-compile",
  "dart-cli-create",
