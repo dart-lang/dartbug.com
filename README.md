@@ -26,7 +26,7 @@ See the [LICENSE](LICENSE) file.
 ## Continuous deployment from Git using Cloud Build
 
 The `dart-redirector` project is configured to deploy this application on every
-push to `master` of [the repository](https://github.com/dart-lang/dartbug.com).
+push to `main` of [the repository](https://github.com/dart-lang/dartbug.com).
 
 See
 [the documentation](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build)
