@@ -176,6 +176,7 @@
  "fe-analyzer-shared-parser",
  "fe-analyzer-shared-parser-recovery",
  "fe-analyzer-shared-technical-debt",
+ "feature-extension-type",
  "feature-inline-classes",
  "feature-macros",
  "fixit-2023",
