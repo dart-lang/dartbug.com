@@ -82,6 +82,21 @@ void main() {
         ),
       );
     });
+
+    test('triage/sdk spaces escaped', () {
+      final actual =
+          findRedirect(Uri.parse('https://dartbug.com/triage/sdk')).toString();
+
+      expect(
+        actual,
+        contains(Uri.encodeQueryComponent('-label:area-analyzer')),
+      );
+      expect(
+        actual,
+        contains(
+            Uri.encodeQueryComponent('-label:"area-migration (deprecated)"')),
+      );
+    });
   });
 
   group('core packages', () {
