@@ -57,7 +57,10 @@ final _matchers = <RegExp, Uri Function(Match)>{
           'q': [
             'is:issue',
             'is:open',
-            ..._areaLabels.map((label) => '-label:$label'),
+            ..._areaLabels.map((label) {
+              final filter = label.contains(' ') ? '"$label"' : label;
+              return '-label:$filter';
+            }),
           ].join(' '),
         },
       ),

@@ -23,5 +23,4 @@ linter:
   - prefer_const_declarations
   - prefer_expression_function_bodies
   - prefer_final_locals
-  - require_trailing_commas
   - use_string_buffers
