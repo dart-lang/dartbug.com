@@ -12,5 +12,5 @@ dependencies:
 
 dev_dependencies:
   dart_flutter_team_lints: ^2.0.0
-  github: ^9.15.1
+  github: ^9.24.0
   test: ^1.25.2
