@@ -276,6 +276,7 @@
  "pkg-collection-helpers",
  "pkg-dds",
  "pkg-dtd",
+ "pkg-dynamic-modules",
  "pkg-fixnum",
  "pkg-js",
  "pkg-json",
