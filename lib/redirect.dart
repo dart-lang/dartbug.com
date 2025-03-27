@@ -46,7 +46,7 @@ final _matchers = <RegExp, Uri Function(String)>{
         'q': [
           'is:issue',
           'is:open',
-          ..._areaLabels.map((label) => '-label:$label'),
+          '-label:${_areaLabels.join(',')}',
         ].join(' '),
       },
     );
@@ -134,11 +134,11 @@ String? _checkMatch(RegExp re, String path) {
   }
 }
 
-final List<String> _areaLabels = List<String>.from(
+final List<String> _areaLabels = [for (var (label as String) in
   jsonDecode(
     File('static/sdk_labels.json').readAsStringSync(),
-  ) as List,
-)..removeWhere((label) => !label.startsWith('area-'));
+  ) as List)
+  if (label.startsWith('area-') || label.startsWith('legacy-area-')) label];
 
 final List<String> corePackages =
     parsePackageInfo(File('static/core_packages.csv'));
