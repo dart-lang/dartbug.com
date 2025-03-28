@@ -1,13 +1,25 @@
 # The core / tier 1 package triage
 
-args,dart-lang/args,dart.dev
-async,dart-lang/async,dart.dev
-characters,dart-lang/characters,dart.dev
-collection,dart-lang/collection,dart.dev
-convert,dart-lang/convert,dart.dev
-crypto,dart-lang/crypto,dart.dev
-fake_async,dart-lang/fake_async,dart.dev
-fixnum,dart-lang/fixnum,dart.dev
+## All of these are now in the `core` mono-repo.
+args,dart-lang/core,dart.dev
+async,dart-lang/core,dart.dev
+characters,dart-lang/core,dart.dev
+collection,dart-lang/core,dart.dev
+convert,dart-lang/core,dart.dev
+crypto,dart-lang/core,dart.dev
+fixnum,dart-lang/core,dart.dev
+lints,dart-lang/core,dart.dev
+logging,dart-lang/core,dart.dev
+os_detect,dart-lang/core,dart.dev
+path,dart-lang/core,dart.dev
+platform,dart-lang/core,dart.dev
+typed_data,dart-lang/core,dart.dev
+
+## These are now inside the `test` monorepo.
+fake_async,dart-lang/test,dart.dev
+matcher,dart-lang/test,dart.dev
+test,dart-lang/test,dart.dev
+
 grpc,grpc/grpc-dart,dart.dev
 http_parser,dart-lang/http_parser,dart.dev
 http,dart-lang/http,dart.dev
@@ -15,13 +27,7 @@ http2,dart-lang/http2,dart.dev
 intl_translation,dart-lang/intl_translation,dart.dev
 intl,dart-lang/intl,dart.dev
 js,dart-lang/sdk,dart.dev
-logging,dart-lang/logging,dart.dev
-matcher,dart-lang/matcher,dart.dev
 meta,dart-lang/sdk,dart.dev
-os_detect,dart-lang/os_detect,dart.dev
-path,dart-lang/path,dart.dev
-test,dart-lang/test,dart.dev
-typed_data,dart-lang/typed_data,dart.dev
 
 # Added to the core triage
 protobuf,google/protobuf.dart,google.dev
@@ -31,6 +37,7 @@ protoc_plugin,google/protobuf.dart,google.dev
 # build,dart-lang/build,dart.dev
 
 # package:ffi is triaged by dcharkes@
+# Now in dart-lang/native monorepo.
 # ffi,dart-lang/ffi,dart.dev
 
 # package:mockito is triaged by srawlins@

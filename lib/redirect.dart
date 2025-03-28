@@ -40,6 +40,33 @@ final _matchers = <RegExp, Uri Function(Match)>{
       _resolveLastChoose(_assignedIssues, _languageAssignedIssues),
   RegExp(r'^/(l(?:anguage)?/)?opened/([A-Za-z0-9\-]+)$'):
       _resolveLastChoose(_openedIssues, _languageOpenedIssues),
+  RegExp(r'^/triage/l(?:anguage)?/?$'): (_) =>
+      Uri.parse('$_dartBug/triage/language/issues'),
+  RegExp(r'^/triage/l(?:anguage)?/issues?$'): (_) =>
+      Uri.parse('$gitHub/issues').replace(
+        queryParameters: {
+          'q': [
+            'is:issue',
+            'is:open',
+            '-label:bug,request,feature,question',
+            'created:>$_dateOneMonth',
+            'repo:$organization/$_languageRepository',
+          ].join(' '),
+        },
+      ),
+  RegExp(r'^/triage/l(?:anguage)?/prs?$'): (_) =>
+      Uri.parse('$gitHub/issues').replace(
+        queryParameters: {
+          'q': [
+            'is:pr',
+            'is:open',
+            'review:none',
+            'draft:false',
+            'created:>$_dateOneMonth',
+            'repo:$organization/$_languageRepository',
+          ].join(' '),
+        },
+      ),
 
   // SDK repo only.
   RegExp(r'^/area/([A-Za-z0-9\-]+)$'): (match) => _listIssues.replace(
@@ -57,15 +84,13 @@ final _matchers = <RegExp, Uri Function(Match)>{
           'q': [
             'is:issue',
             'is:open',
-            ..._areaLabels.map((label) {
-              final filter = label.contains(' ') ? '"$label"' : label;
-              return '-label:$filter';
-            }),
+            '-label:${_areaLabels.join(',')}',
           ].join(' '),
         },
       ),
 
   // core packages triage
+  RegExp(r'^/c(?:ore)?/?$'): (_) => Uri.parse('$gitHub/$organization/core'),
   RegExp(r'^/triage/core$'): (_) => Uri.parse('$_dartBug/triage/core/issues'),
   // Issues opened in the last 30 days not marked as bugs or enhancements.
   RegExp(r'^/triage/core/issues$'): (_) => Uri.parse('$gitHub/issues').replace(
@@ -73,10 +98,7 @@ final _matchers = <RegExp, Uri Function(Match)>{
           'q': [
             'is:issue',
             'is:open',
-            '-label:bug',
-            '-label:enhancement',
-            '-label:type-enhancement',
-            '-label:documentation',
+            '-label:bug,enhancement,type-enhancement,documentation',
             'created:>$_dateOneMonth',
             ..._corePackages.map((repo) => 'repo:$repo'),
           ].join(' '),
@@ -97,6 +119,7 @@ final _matchers = <RegExp, Uri Function(Match)>{
         },
       ),
 
+  RegExp(r'^/t(?:ools)?/?$'): (_) => Uri.parse('$gitHub$organization/tools'),
   // tools packages triage
   RegExp(r'^/triage/tools$'): (_) => Uri.parse('$_dartBug/triage/tools/issues'),
   // Issues opened in the last 30 days not marked as bugs or enhancements.
@@ -105,10 +128,7 @@ final _matchers = <RegExp, Uri Function(Match)>{
           'q': [
             'is:issue',
             'is:open',
-            '-label:bug',
-            '-label:enhancement',
-            '-label:type-enhancement',
-            '-label:documentation',
+            '-label:bug,enhancement,type-enhancement,documentation',
             'created:>$_dateOneMonth',
             ..._toolsPackages.map((repo) => 'repo:$repo'),
           ].join(' '),
@@ -138,11 +158,12 @@ final _matchers = <RegExp, Uri Function(Match)>{
 Uri Function(Match) _resolveLastChoose(Uri base1, Uri base2) => (Match match) =>
     ((match[1] == null) ? base1 : base2).resolve(match[match.groupCount]!);
 
-final List<String> _areaLabels = List<String>.from(
-  jsonDecode(
+final List<String> _areaLabels = [
+  for (var (label as String) in jsonDecode(
     File('static/sdk_labels.json').readAsStringSync(),
-  ) as List,
-)..removeWhere((label) => !label.startsWith('area-'));
+  ) as List)
+    if (label.startsWith('area-') || label.startsWith('legacy-area-')) label
+];
 
 final List<String> _corePackages =
     _parsePackageInfo(File('static/core_packages.csv'));
@@ -172,15 +193,13 @@ Uri? findRedirect(Uri requestUri) {
 /// that we're interested in triaging.
 List<String> _parsePackageInfo(File file) => file
     .readAsLinesSync()
-    .where((line) => line.isNotEmpty)
-    .where((line) => !line.startsWith('#'))
+    .where((line) => line.isNotEmpty && !line.startsWith('#'))
     .map((String line) {
       // "args,dart-lang/args,dart.dev"
       final info = line.split(',');
-      return (name: info[0], repo: info[1]);
+      return info[1];
     })
-    .where((package) => package.repo != 'dart-lang/sdk')
-    .map((package) => package.repo)
+    .where((repo) => repo != 'dart-lang/sdk')
     .toSet()
     .toList()
   ..sort();
