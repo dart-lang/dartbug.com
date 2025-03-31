@@ -84,7 +84,7 @@ final _matchers = <RegExp, Uri Function(Match)>{
           'q': [
             'is:issue',
             'is:open',
-            '-label:${_areaLabels.join(',')}',
+            '-label:${_areaLabels.map(_quoteSpaces).join(',')}',
           ].join(' '),
         },
       ),
@@ -211,3 +211,5 @@ String get _dateOneMonth {
       '${date.month.toString().padLeft(2, '0')}-'
       '${date.day.toString().padLeft(2, '0')}';
 }
+
+String _quoteSpaces(String label) => label.contains(' ') ? '"$label"' : label;
