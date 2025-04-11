@@ -84,17 +84,20 @@ void main() {
     });
 
     test('triage/sdk spaces escaped', () {
-      final actual =
-          findRedirect(Uri.parse('https://dartbug.com/triage/sdk')).toString();
+      final actual = findRedirect(Uri.parse('https://dartbug.com/triage/sdk'))!;
+
+      final parameters = actual.queryParameters['q']!;
+      final parts = splitParameters(parameters);
+      final labels = parts.firstWhere((s) => s.startsWith('-label:'));
 
       expect(
-        actual,
-        contains(Uri.encodeQueryComponent('-label:area-analyzer')),
+        labels,
+        contains('area-analyzer'),
       );
+
       expect(
-        actual,
-        contains(
-            Uri.encodeQueryComponent('-label:"area-migration (deprecated)"')),
+        labels,
+        contains('"area-migration (deprecated)"'),
       );
     });
   });
@@ -112,8 +115,8 @@ void main() {
         findRedirect(Uri.parse('https://dartbug.com/triage/core/issues'))
             .toString(),
         startsWith(
-          'https://github.com/issues?q=is%3Aissue+is%3Aopen+-label%3Abug'
-          '+-label%3Aenhancement+',
+          'https://github.com/issues?q=is%3Aissue+is%3Aopen+-label%3Abug%2C'
+          'enhancement',
         ),
       );
     });
@@ -187,4 +190,24 @@ void main() {
       });
     }
   });
+}
+
+// Splits on spaces, if not inside quotes.
+List<String> splitParameters(String parameters) {
+  const space = 0x20;
+  const quote = 0x22;
+  final result = <String>[];
+  var start = 0;
+  var insideQuote = false;
+  for (var i = 0; i < parameters.length; i++) {
+    final char = parameters.codeUnitAt(i);
+    if (char == quote) {
+      insideQuote = !insideQuote;
+    } else if (char == space && !insideQuote) {
+      if (i > start) result.add(parameters.substring(start, i));
+      start = i + 1;
+    }
+  }
+  if (start < parameters.length) result.add(parameters.substring(start));
+  return result;
 }
