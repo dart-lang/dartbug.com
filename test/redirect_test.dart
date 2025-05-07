@@ -78,7 +78,7 @@ void main() {
         findRedirect(Uri.parse('https://dartbug.com/triage/sdk')).toString(),
         startsWith(
           'https://github.com/dart-lang/sdk/issues?'
-          'q=is%3Aissue+is%3Aopen+-label%3Aarea-analyzer',
+          'q=is%3Aissue+is%3Aopen+-label%3Aarea-',
         ),
       );
     });
@@ -92,7 +92,7 @@ void main() {
 
       expect(
         labels,
-        contains('area-analyzer'),
+        contains('area-vm'),
       );
 
       expect(
