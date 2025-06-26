@@ -11,8 +11,9 @@ Future<void> main() async {
   final gitHub = GitHub();
 
   try {
-    final sdkLabelRequest =
-        gitHub.issues.listLabels(RepositorySlug('dart-lang', 'sdk'));
+    final sdkLabelRequest = gitHub.issues.listLabels(
+      RepositorySlug('dart-lang', 'sdk'),
+    );
     final labelNames = [await for (var label in sdkLabelRequest) label.name];
 
     File('static/sdk_labels.json').writeAsStringSync(

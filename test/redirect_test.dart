@@ -11,10 +11,7 @@ void main() {
       findRedirect(Uri.parse('http://dartbug.com/1234')).toString(),
       '$gitHub/$organization/$repository/issues/1234',
     );
-    expect(
-      findRedirect(Uri.parse('http://dartbug.com/-1234')),
-      isNull,
-    );
+    expect(findRedirect(Uri.parse('http://dartbug.com/-1234')), isNull);
   });
 
   test('new issue', () {
@@ -37,10 +34,7 @@ void main() {
       findRedirect(Uri.parse('http://dartbug.com/assigned/nex3')).toString(),
       '$gitHub/$organization/$repository/issues/assigned/nex3',
     );
-    expect(
-      findRedirect(Uri.parse('http://dartbug.com/søren')),
-      isNull,
-    );
+    expect(findRedirect(Uri.parse('http://dartbug.com/søren')), isNull);
   });
 
   test('list issues', () {
@@ -90,15 +84,9 @@ void main() {
       final parts = splitParameters(parameters);
       final labels = parts.firstWhere((s) => s.startsWith('-label:'));
 
-      expect(
-        labels,
-        contains('area-vm'),
-      );
+      expect(labels, contains('area-vm'));
 
-      expect(
-        labels,
-        contains('"area-migration (deprecated)"'),
-      );
+      expect(labels, contains('"area-migration (deprecated)"'));
     });
   });
 
@@ -112,8 +100,9 @@ void main() {
 
     test('triage/core/issues', () {
       expect(
-        findRedirect(Uri.parse('https://dartbug.com/triage/core/issues'))
-            .toString(),
+        findRedirect(
+          Uri.parse('https://dartbug.com/triage/core/issues'),
+        ).toString(),
         startsWith(
           'https://github.com/issues?q=is%3Aissue+is%3Aopen+-label%3Abug%2C'
           'enhancement',
@@ -123,8 +112,9 @@ void main() {
 
     test('triage/core/prs', () {
       expect(
-        findRedirect(Uri.parse('https://dartbug.com/triage/core/prs'))
-            .toString(),
+        findRedirect(
+          Uri.parse('https://dartbug.com/triage/core/prs'),
+        ).toString(),
         startsWith(
           'https://github.com/issues?q=is%3Apr+is%3Aopen'
           '+review%3Anone+draft%3Afalse+created',
@@ -140,8 +130,9 @@ void main() {
       group('(/$prefix)', () {
         test('issue number', () {
           expect(
-            findRedirect(Uri.parse('http://dartbug.com/$prefix/1234'))
-                .toString(),
+            findRedirect(
+              Uri.parse('http://dartbug.com/$prefix/1234'),
+            ).toString(),
             '$gitHub/$organization/$repository/issues/1234',
           );
           expect(
@@ -152,13 +143,15 @@ void main() {
 
         test('new issue', () {
           expect(
-            findRedirect(Uri.parse('http://dartbug.com/$prefix/new'))
-                .toString(),
+            findRedirect(
+              Uri.parse('http://dartbug.com/$prefix/new'),
+            ).toString(),
             '$gitHub/$organization/$repository/issues/new',
           );
           expect(
-            findRedirect(Uri.parse('http://dartbug.com/$prefix/NEW'))
-                .toString(),
+            findRedirect(
+              Uri.parse('http://dartbug.com/$prefix/NEW'),
+            ).toString(),
             '$gitHub/$organization/$repository/issues/new',
           );
         });
@@ -171,8 +164,9 @@ void main() {
             '$gitHub/$organization/$repository/issues/assigned/kevmoo',
           );
           expect(
-            findRedirect(Uri.parse('http://dartbug.com/$prefix/assigned/nex3'))
-                .toString(),
+            findRedirect(
+              Uri.parse('http://dartbug.com/$prefix/assigned/nex3'),
+            ).toString(),
             '$gitHub/$organization/$repository/issues/assigned/nex3',
           );
           expect(

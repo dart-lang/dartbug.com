@@ -34,12 +34,10 @@ Response _handler(Request request) {
     switch (request.requestedUri.pathSegments.single) {
       case 'robots.txt':
         _robotTxt++;
-        return Response.ok(
-          r'''
+        return Response.ok(r'''
 User-agent: *
 Allow: /
-''',
-        );
+''');
       case '\$info':
         _infoRequests++;
 
@@ -52,10 +50,14 @@ Allow: /
             'robot.txt': _robotTxt,
           },
           'Dart version': Platform.version,
-          'request headers':
-              SplayTreeMap.of(request.headers, compareAsciiLowerCase),
-          'Environment':
-              SplayTreeMap.of(Platform.environment, compareAsciiLowerCase),
+          'request headers': SplayTreeMap.of(
+            request.headers,
+            compareAsciiLowerCase,
+          ),
+          'Environment': SplayTreeMap.of(
+            Platform.environment,
+            compareAsciiLowerCase,
+          ),
           'agents': _agents,
         };
 
@@ -78,16 +80,13 @@ Allow: /
     return Response.found(location);
   } else {
     _notFound++;
-    throw BadRequestException(
-      404,
-      """
+    throw BadRequestException(404, """
 I don't support redirecting path '${request.requestedUri.path}'
 
 Check out my source at https://github.com/dart-lang/dartbug.com
 
 Supported routes:
 ${routes.map((r) => '  $r').join('\n')}
-""",
-    );
+""");
   }
 }
