@@ -125,10 +125,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_cloud
-      sha256: "2fa5d1adf3939ac6e7130ae84de40727efea9d0e08db2e3d7fea3b8b432d741c"
+      sha256: "76a1552170210c8a51500d555e93b526f92ab2a86aadbebd8b8d5f3d83a97c29"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.0"
   http:
     dependency: "direct main"
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
+      sha256: "9f29b9bcc8ee287b1a31e0d01be0eae99a930dbffdaecf04b3f3d82a969f296f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.18.1"
   mime:
     dependency: transitive
     description:
