@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
-import 'package:google_cloud/google_cloud.dart';
+import 'package:google_cloud_shelf/google_cloud_shelf.dart';
 import 'package:shelf/shelf.dart';
 
 import 'redirect.dart';
@@ -80,7 +80,7 @@ Allow: /
     return Response.found(location);
   } else {
     _notFound++;
-    throw BadRequestException(404, """
+    throw HttpResponseException(404, """
 I don't support redirecting path '${request.requestedUri.path}'
 
 Check out my source at https://github.com/dart-lang/dartbug.com
