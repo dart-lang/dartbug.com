@@ -125,10 +125,90 @@ packages:
     dependency: "direct main"
     description:
       name: google_cloud
-      sha256: fbcde933b2d8600c3cdb2328f8f4c47628ec29a39e9cef85dee535c7868993c4
+      sha256: b385e20726ef5315d302c5933bfb728103116c5be2d3d17094b01a82da538c1f
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.5.0"
+  google_cloud_api:
+    dependency: transitive
+    description:
+      name: google_cloud_api
+      sha256: "0f1857b3ff81da07c75782ad89220dda522710aad08cfdb0f4088d6b52e5178d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_logging:
+    dependency: transitive
+    description:
+      name: google_cloud_logging
+      sha256: "88fff7e2edd331a9663072abaa91396bf3351d68eae3f1d48a70613e2649e505"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
+  google_cloud_logging_type:
+    dependency: transitive
+    description:
+      name: google_cloud_logging_type
+      sha256: ee72bb82718d72d0e8f24d9e2a84c169f0fec9fe7a534c589612cb95452a8467
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_logging_v2:
+    dependency: transitive
+    description:
+      name: google_cloud_logging_v2
+      sha256: "232db81e6f79cfc34ca91e5c0742fa9af137558cefc73ba6fec6ca5b90e2037a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_longrunning:
+    dependency: transitive
+    description:
+      name: google_cloud_longrunning
+      sha256: "6795a17c5b14f50a7db2bb8564f2e033973fad698eae75fe7bd59f5614d5dda6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_protobuf:
+    dependency: transitive
+    description:
+      name: google_cloud_protobuf
+      sha256: f45f656c63d040b21d5cf947a3c44d537eb82ee68e485ccfcf2edbcbd1041461
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_rpc:
+    dependency: transitive
+    description:
+      name: google_cloud_rpc
+      sha256: "143ca2179dbcc5e4d16e8ee352aa4891b105b0aafc4e617bd4d713715a4afef2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
+  google_cloud_shelf:
+    dependency: "direct main"
+    description:
+      name: google_cloud_shelf
+      sha256: "63e81361a08557d0a0ca7c027065ca03ebef929934780f3e315c60ad3723e6a7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
+  google_identity_services_web:
+    dependency: transitive
+    description:
+      name: google_identity_services_web
+      sha256: "5d187c46dc59e02646e10fe82665fc3884a9b71bc1c90c2b8b749316d33ee454"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3+1"
+  googleapis_auth:
+    dependency: transitive
+    description:
+      name: googleapis_auth
+      sha256: "2a8895c3885197f96bb2fd91ee0ae77b53ff3874c7b1f1eadb6566248e880958"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   http:
     dependency: "direct main"
     description:

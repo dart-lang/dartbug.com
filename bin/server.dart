@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:dartbug/server.dart';
 import 'package:google_cloud/google_cloud.dart';
+import 'package:google_cloud_shelf/google_cloud_shelf.dart';
 import 'package:shelf/shelf.dart';
 
 Future<void> main() async {
@@ -13,7 +14,7 @@ Future<void> main() async {
   try {
     projectId = await projectIdFromMetadataServer();
     print('Running on Google cloud! Project ID: $projectId');
-  } on BadConfigurationException {
+  } on MetadataServerException {
     // NOOP - not on cloud!
     print('Not running on Google Cloud.');
   }
