@@ -141,10 +141,10 @@ packages:
     dependency: transitive
     description:
       name: google_cloud_logging
-      sha256: "88fff7e2edd331a9663072abaa91396bf3351d68eae3f1d48a70613e2649e505"
+      sha256: "17a908f5b6c2136cf62475e8cc2cfb86c356c490ba480b6f85f43d5fcd36f570"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
+    version: "0.6.0+1"
   google_cloud_logging_type:
     dependency: transitive
     description:
@@ -189,10 +189,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_cloud_shelf
-      sha256: "63e81361a08557d0a0ca7c027065ca03ebef929934780f3e315c60ad3723e6a7"
+      sha256: "64e3e9f9cd24c2590094edd1d779d01e39d640b83aa05f31f2292add9f35bb90"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
+    version: "0.6.0+1"
   google_identity_services_web:
     dependency: transitive
     description:
