@@ -17,7 +17,6 @@ int _redirects = 0;
 int _notFound = 0;
 int _robotTxt = 0;
 final _stopwatch = Stopwatch();
-final _agents = SplayTreeMap<String, int>(compareAsciiLowerCase);
 
 Handler get handler {
   _stopwatch.start();
@@ -25,11 +24,6 @@ Handler get handler {
 }
 
 Response _handler(Request request) {
-  final agent = request.headers['user-agent'];
-  if (agent != null) {
-    _agents[agent] = (_agents[agent] ?? 0) + 1;
-  }
-
   if (request.requestedUri.pathSegments.length == 1) {
     switch (request.requestedUri.pathSegments.single) {
       case 'robots.txt':
@@ -54,11 +48,6 @@ Allow: /
             request.headers,
             compareAsciiLowerCase,
           ),
-          'Environment': SplayTreeMap.of(
-            Platform.environment,
-            compareAsciiLowerCase,
-          ),
-          'agents': _agents,
         };
 
         return Response.ok(
